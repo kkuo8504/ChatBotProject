@@ -133,4 +133,13 @@ public class ChatBotPanel extends JPanel
 		chatArea.append("\n" + input);
 		
 	}
+	
+	loadButton.addActionListener(new ActionListener()
+	{
+		public void actionPerformed(ActionEvent click)
+		{
+			
+		}
+		
+	});
 }

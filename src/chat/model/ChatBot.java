@@ -93,36 +93,34 @@ public class ChatBot
 	 * @param chatCount 
 	 * @return What the ChatBot says because of the supplied input.
 	 */
-	public String processText(String userText, int chatCount)
+	public String processText(String userText);
 	{
-		String processedText = "";
-		incrementChats();
-
-		int randomChoice = (int) (Math.random() * 6);
-		if (userText != null && userText.length() > 0)
+		String result = "";
+		if (getNumberOfChats() < 5)
 		{
-			if(numberOfChats <5)
-			{
-				processedText = introduceUser(userText);
-			}
-			else
-			{
-				processedText = randomChatTopic(userText);
-			}
+			result = introduceUser(userText);
 		}
-		else
+		else if (result != null && userText.length() > 0)
 		{
-			numberOfChats--;
-			processedText = "Answer the question!!!";
+			result = randomChatTopic(userText);
 		}
-		incrementChats();
-		return processedText;
+		else 
+		{
+			result = "Use the words!";
+			numberOfChats --;
+		}
+		getNumberOfChats();
+		return result;
+}
 	
-			String input;
-			if (randomChoice == 0)
+		private String intoduceUser(String userText, String processedText, String input)
+		{
+			String userQuestion= "";
+			
+			if(numberOfChats == 0)
 			{
 				myUser.setName(userText);
-				processedText = "Hello " + myUser.getName() + " what is your age?";
+				processedText = "Hello" + myUser.getName() + "what is your age?";
 			}
 			else if(numberOfChats ==1)
 			{
@@ -155,6 +153,34 @@ public class ChatBot
 			{
 				
 			}
+
+		int randomChoice = (int) (Math.random() * 6);
+		if (userText != null && userText.length() > 0)
+		{
+			if(numberOfChats <5)
+			{
+				processedText = introduceUser(userText);
+			}
+			else
+			{
+				processedText = randomChatTopic(userText);
+			}
+		}
+		else
+		{
+			numberOfChats--;
+			processedText = "Answer the question!!!";
+		}
+		incrementChats();
+		return processedText;
+	
+			String input;
+			if (randomChoice == 0)
+			{
+				myUser.setName(userText);
+				processedText = "Hello " + myUser.getName() + " what is your age?";
+			}
+			
 				
 				private String randomChatTopic(String userInput)
 				{
@@ -162,6 +188,7 @@ public class ChatBot
 					String randomTopic ="";
 					int randomChoice1 =(int)(Math.random() *7);
 					if (randomChoice1 ==0)
+						
 				{			
 				if (stringLengthChecker(userText))
 				{
@@ -198,11 +225,11 @@ public class ChatBot
 			
 			
 				
-//				else String randomTopic;
+//			else String randomTopic;
 					
 				if(randomChoice1 == 3)
 				{
-					if (chatCount < 10)
+					if (numberOfChats < 10)
 					{
 						processedText = "";
 					}
@@ -243,8 +270,21 @@ public class ChatBot
 
 				
 		return processedText;
-		}
+		
 }
+	}
+
+	private String randomChatTopic(String userText)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private String introduceUser(String userText)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	private boolean userInputChecker(String input)
 	{
